@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    //Use this when writing to a db
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
