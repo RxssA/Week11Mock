@@ -92,4 +92,19 @@ class ProductControllerTest {
         mockMvc.perform(delete("/products/1"))
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    void testUpdateProductNotFound() throws Exception {
+        Product updatedProduct = new Product(1L, "Updated Pot", "15litres", 12000);
+
+        when(productService.getProductById(1L)).thenReturn(Optional.empty());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonDetails = mapper.writeValueAsString(updatedProduct);
+
+        mockMvc.perform(put("/products/1")
+                        .contentType("application/json")
+                        .content(jsonDetails))
+                .andExpect(status().isNotFound());
+    }
 }
